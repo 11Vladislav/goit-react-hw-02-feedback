@@ -1,14 +1,22 @@
-import PropTypes from 'prop-types';
-import { Info, Container } from './FeedbackOptions.styled'
+ import PropTypes from 'prop-types';
+ import { FeedbackList, FeedbackBtn, FeedbackItem } from './FeedbackOptions.styled'
 
-export const FeedbackOptions = () => {
-    return (
-        <Container>
-        <Info>{'Good'}</Info>
-         <Info>{'Bad'}</Info>
-        <Info>{'Neutral'}</Info>
-        </Container>
-    );
-    }
+export const FeedbackOptions = ({ options, onBtnClick }) => {
+    return(
+     <FeedbackList>
+        {options.map(option => (
+            <FeedbackItem key={option}>
+                <FeedbackBtn onClick={() => onBtnClick(option)}>{option}</FeedbackBtn>
+            </FeedbackItem>
+        ))}
+    </FeedbackList>
+    )
+
+};
 
 export default FeedbackOptions;
+
+FeedbackOptions.propTypes = {
+    options: PropTypes.arrayOf(PropTypes.string).isRequired,
+    onBtnClick: PropTypes.func.isRequired,
+}
